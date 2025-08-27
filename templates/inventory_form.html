@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ 'Edit' if item else 'Add' }} Item</h2>
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input class="form-control" type="text" name="name" value="{{ item.name if item else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Quantity</label>
+    <input class="form-control" type="number" name="quantity" value="{{ item.quantity if item else 0 }}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Location</label>
+    <input class="form-control" type="text" name="location" value="{{ item.location if item else '' }}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Note</label>
+    <textarea class="form-control" name="note">{{ item.note if item else '' }}</textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Save</button>
+</form>
+{% endblock %}

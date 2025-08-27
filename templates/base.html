@@ -12,7 +12,10 @@
     {% if session.get('user_id') %}
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('asset_add') }}">Add</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('asset_list') }}">Assets</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('asset_add') }}">Add Asset</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('inventory_list') }}">Inventory</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('inventory_add') }}">Add Item</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('export', fmt='excel') }}">Export Excel</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('export', fmt='word') }}">Export Word</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('export', fmt='pdf') }}">Export PDF</a></li>

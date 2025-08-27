@@ -41,6 +41,14 @@ class Asset(db.Model):
     price = db.Column(db.Float)
     note = db.Column(db.Text)
 
+
+class InventoryItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    quantity = db.Column(db.Integer, default=0)
+    location = db.Column(db.String(100))
+    note = db.Column(db.Text)
+
 def login_required(view_func):
     def wrapper(*args, **kwargs):
         if 'user_id' not in session:
@@ -133,6 +141,52 @@ def asset_delete(asset_id):
     db.session.delete(asset)
     db.session.commit()
     return redirect(url_for('asset_list'))
+
+
+@app.route('/inventory')
+@login_required
+def inventory_list():
+    items = InventoryItem.query.all()
+    return render_template('inventory_list.html', items=items)
+
+
+@app.route('/inventory/add', methods=['GET', 'POST'])
+@login_required
+def inventory_add():
+    if request.method == 'POST':
+        item = InventoryItem(
+            name=request.form['name'],
+            quantity=int(request.form.get('quantity', 0)),
+            location=request.form.get('location'),
+            note=request.form.get('note'),
+        )
+        db.session.add(item)
+        db.session.commit()
+        return redirect(url_for('inventory_list'))
+    return render_template('inventory_form.html', item=None)
+
+
+@app.route('/inventory/<int:item_id>/edit', methods=['GET', 'POST'])
+@login_required
+def inventory_edit(item_id):
+    item = InventoryItem.query.get_or_404(item_id)
+    if request.method == 'POST':
+        item.name = request.form['name']
+        item.quantity = int(request.form.get('quantity', 0))
+        item.location = request.form.get('location')
+        item.note = request.form.get('note')
+        db.session.commit()
+        return redirect(url_for('inventory_list'))
+    return render_template('inventory_form.html', item=item)
+
+
+@app.route('/inventory/<int:item_id>/delete', methods=['POST'])
+@login_required
+def inventory_delete(item_id):
+    item = InventoryItem.query.get_or_404(item_id)
+    db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for('inventory_list'))
 
 @app.route('/export/<string:fmt>')
 @login_required
