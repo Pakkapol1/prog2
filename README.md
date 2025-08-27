@@ -10,6 +10,20 @@ This repository contains various programming projects and exercises.
 2. Open the project in your preferred IDE
 3. Start coding!
 
+## Command-line inventory program
+This repository includes a small command-line tool for managing assets without a web interface.
+
+### Initialize the database
+```bash
+python inventory_cli.py --initdb
+```
+
+### Run the program
+```bash
+python inventory_cli.py
+```
+Default login is `admin` / `admin`.
+
 ## Contributing
 Feel free to contribute to this project by submitting pull requests or opening issues.
 
