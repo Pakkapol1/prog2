@@ -24,6 +24,15 @@ python inventory_cli.py
 ```
 Default login is `admin` / `admin`.
 
+## Desktop GUI inventory program
+This repository also provides a simple Tkinter-based interface for managing assets.
+
+### Run the program
+```bash
+python inventory_gui.py
+```
+Log in with the default `admin` / `admin` credentials.
+
 ## Contributing
 Feel free to contribute to this project by submitting pull requests or opening issues.
 

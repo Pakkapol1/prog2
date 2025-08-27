@@ -72,3 +72,9 @@ logs
 # Temporary files
 tmp/
 temp/
+# Python
+__pycache__/
+*.py[cod]
+
+# SQLite database
+inventory.db
